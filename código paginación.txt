@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="pagination">
+        <button class="prev">&lt;</button>
+        <button class="page">1</button>
+        <button class="page">2</button>
+        <button class="ellipsis">...</button>
+        <button class="page">5</button>
+        <button class="page">6</button>
+        <button class="next">&gt;</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+
+----------------------
+
+CSS (styles.css):
+
+.pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+}
+
+.pagination button {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    margin: 0 2px;
+    cursor: pointer;
+    background-color: #fff;
+}
+
+.pagination button.ellipsis {
+    pointer-events: none;
+}
+
+----------------------------
+JAVASCRIPT
+
+
+const pagination = document.querySelector('.pagination');
+const pages = document.querySelectorAll('.page');
+const prevButton = document.querySelector('.prev');
+const nextButton = document.querySelector('.next');
+
+let currentPage = 1;
+
+function updatePagination() {
+    pages.forEach(page => page.classList.remove('active'));
+    pages[currentPage - 1].classList.add('active');
+}
+
+prevButton.addEventListener('click', () => {
+    if (currentPage > 1) {
+        currentPage--;
+        updatePagination();
+    }
+});
+
+nextButton.addEventListener('click', () => {
+    if (currentPage < pages.length - 1) {
+        currentPage++;
+        updatePagination();
+    }
+});
+
+updatePagination();
